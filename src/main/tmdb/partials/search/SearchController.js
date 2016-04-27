@@ -12,7 +12,9 @@ define( [ 'angular',
             var config    = angular.module("config");
             $scope.view   = {
                 searchPhrase: "",
-                resultList: []
+                resultList: [],
+                
+                images: config.apiImg
             };
             
             $scope.clearSearch = function() {

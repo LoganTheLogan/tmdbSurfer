@@ -21,16 +21,17 @@
         ng-style="getMenuPlace()"
         >
         <div ng-repeat="match in view.resultlist" style="cursor:pointer;margin-left:10px;margin-right:10px">
-            <a ng-if="match.media_type === 'movie' && match.poster_path" ng-click="selectionMade(match)">
+            <a ng-if="(match.media_type === 'movie') && match.poster_path" ng-click="selectionMade(match)">
                 <div style="margin-bottom: 2px; margin-top: 2px;font-size:20px">
                     <img ng-if="match.poster_path" src="{{view.images}}{{ match.poster_path }}" style="width:25px;min-height:37px; margin-right: 10px" />
                     {{ match.title }}
                 </div>
             </a>
-            <a ng-if="match.media_type === 'person' && match.profile_path" ng-click="selectionMade(match)">
+            
+            <a ng-if="(match.media_type === 'person') && match.profile_path" ng-click="selectionMade(match)">
                 <div style="margin-bottom: 2px; margin-top: 2px;font-size:20px">
                     <img src="{{view.images}}{{ match.profile_path }}" style="width:25px;min-height:37px; margin-right:10px" />
-                    {{ match.name }}
+                    {{ match.poster_path }}
                 </div>
             </a>
         </div>
