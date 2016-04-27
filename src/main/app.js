@@ -10,15 +10,16 @@ define([ 'angular',
          'tmdb/directives/results',
          'tmdb/directives/search',
          'tmdb/partials/home/HomeController',
-         'tmdb/partials/remoteImageLoader/RemoteImageLoader',
+         'tmdb/partials/remoteImageLoader/ImageController',
          'tmdb/partials/results/ResultsController',
          'tmdb/partials/search/SearchController',
          'tmdb/services/TMDBAPIService',
+         'tmdb/services/UtilsService',
          ], 
     function(   angular, config, $resource, $location, LocalStorageModule, 
                 movieCastDirective, personCastDirective, resultsDirective, searchDirective,
-                HomeController, RemoteImageLoader, ResultsController, SearchController,
-                TMDBAPIService ) {
+                HomeController, ImageController, ResultsController, SearchController,
+                TMDBAPIService, UtilsService ) {
     	"use strict";
 
         var angularModules = config.standardAngularModules.concat( 'LocalStorageModule' );
@@ -31,8 +32,9 @@ define([ 'angular',
     	}]);
 
         app.service( "TMDBAPIService", TMDBAPIService);
+        app.service( "UtilsService", UtilsService);
 
-        app.controller( "RemoteImageLoader", RemoteImageLoader );
+        app.controller( "ImageController", ImageController );
 
         app.controller( "HomeController", HomeController );
 

@@ -1,14 +1,14 @@
 
 define( [ 'angular',
-          'tmdb/partials/remoteImageLoader/RemoteImageLoader'], 
-    function( angular, RemoteImageLoader ) {
+          'tmdb/partials/remoteImageLoader/ImageController'], 
+    function( angular, ImageController ) {
         "use strict";
 
         return function() {
             return {
                 transclude: true,
                 replace: true,
-                controller: RemoteImageLoader,
+                controller: ImageController,
                 templateUrl: '/tmdb/partials/person/cast.html',
                 restrict: 'E',
                 scope: {
@@ -18,13 +18,7 @@ define( [ 'angular',
                 link: function($scope, element) {
                 
                     function setDivHeight() { 
-                        var innerElement = element.find('#cast-movies');
-                    
-                        var divTop = innerElement.offset().top 
-                        var windowHeight = window.innerHeight;
-                        var divHeight = (windowHeight - divTop) + "px"; 
-                        
-                        innerElement.css({"height":divHeight}); 
+                        $scope.utilsInstance.extendToLowWindowEdge(element.find('#cast-movies'));
                     }
                     
                     $scope.$on('layoutChange', setDivHeight);

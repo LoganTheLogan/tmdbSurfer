@@ -3,8 +3,10 @@
 define( [ 'angular',
           'ngRoute',
           'config/config',
-          'tmdb/services/TMDBAPIService'],
-    function( angular, $routeParams, config, TMDBAPIService ) {
+          'tmdb/services/TMDBAPIService',
+          'tmdb/services/UtilsService',
+          ],
+    function( angular, $routeParams, config, TMDBAPIService, UtilsService ) {
         "use strict";
         
         
@@ -24,6 +26,8 @@ define( [ 'angular',
         }
         
         var ResultsController = function($scope, TMDBAPIService, $routeParams, $timeout ) {
+        
+            $scope.UtilsService = UtilsService; 
         
             $scope.$watch('chosenItem', function(item) {
             
@@ -59,7 +63,7 @@ define( [ 'angular',
                 }
                 else if(item.media_type == 'person') {
                     //look for movies this person has acted in
-                    process(TMDBAPIService.Person().person.person, function(results) { results.movie_credits.cast = scrub(results.movie_credits.cast, 'profile_path');})
+                    process(TMDBAPIService.Person().person.person, function(results) { results.movie_credits.cast = scrub(results.movie_credits.cast, 'poster_path');})
                 }
             });
         

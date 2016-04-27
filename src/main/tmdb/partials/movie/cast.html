@@ -1,18 +1,23 @@
 <div>
     <h1>Castmembers of the movie "{{movieName}}":</h1>
-    <div ng-if="movieCredits.length" ng-repeat="credit in movieCredits">
-        <div ng-if="credit.profile_path"
-            style="float: left; margin: 10px; width: 100px; height: 150px;cursor:pointer" 
-            ng-click="credit.media_type='person';$emit('navToItem', credit)"
-            >
-            <a >
-                <img src="{{view.images}}{{ credit.profile_path }}" width="50" height="75" ng-if="credit.profile_path" />
-            </a>
-            <br />
-            {{ credit.name }}
-            <br />as {{ credit.character }}
+
+    <div id="movies-actors" ng-if="movieCredits.length" style="overflow-x:hidden;overflow-y:scroll">
+        <div ng-if="movieCredits.length" ng-repeat="credit in movieCredits">
+            <div ng-if="credit.profile_path"
+                style="float: left; margin: 10px; width: 100px; height: 150px;cursor:pointer" 
+                ng-click="credit.media_type='person';$emit('navToItem', credit)"
+                >
+                <a >
+                    <img src="{{view.images}}{{ credit.profile_path }}" width="50" height="75" ng-if="credit.profile_path" />
+                </a>
+                <br />
+                {{ credit.name }}
+                <br />as {{ credit.character }}
+            </div>
         </div>
     </div>
+        
+        
     <div ng-if="!movieCredits.length">
         (no results found)
     </div>
