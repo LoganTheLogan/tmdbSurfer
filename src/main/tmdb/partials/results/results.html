@@ -1,0 +1,26 @@
+<div>
+    <div ng-if="searching" style="font-size:20px">
+        Searching...
+    </div>
+
+    <div ng-if="(!searching) && (!err)">
+        <div ng-if="chosenItem.media_type=='movie'">
+            <div style="width:100%">
+                 <movie-cast movie-name="chosenItem.title" movie-credits="searchResults.credits.cast" />
+            </div>
+        </div>
+        <div ng-if="chosenItem.media_type=='person'">
+            <div style="width:100%" >
+                <person-cast person-name="chosenItem.name" cast-credits="searchResults.movie_credits.cast" />
+            </div>
+        </div>
+    </div>
+    
+    <div ng-if="err" style="font-size:20px;color:red">
+        {{err}}
+    </div>
+    
+</div>
+
+
+

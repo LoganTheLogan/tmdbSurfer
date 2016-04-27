@@ -1,0 +1,40 @@
+<div>
+    <div class="input-group">
+        <input 
+            type="text" 
+            style="width:100%;font-size:20px"  
+            placeholder="Enter an actor or movie..." 
+            name="searchPhrase" 
+            id="searchPhrase" 
+            class="form-control" 
+            ng-model="view.searchPhrase" 
+            ng-change="search()" 
+            ng-keydown="searchKeyDown($event)"
+        />
+    </div>
+    
+    
+    <!-- The popup menu used to clarify which match to go with -->
+    <div ng-if="view.resultlist.length" 
+        class="pull-right" 
+        style="min-width:250px;background-color: #ffffff; position: absolute; z-index: 100; border-top: 1px solid #dddddd; border-bottom: 1px solid #dddddd; border-left: 1px solid #dddddd; border-right: 1px solid #dddddd;"
+        ng-style="getMenuPlace()"
+        >
+        <div ng-repeat="match in view.resultlist" style="cursor:pointer;margin-left:10px;margin-right:10px">
+            <a ng-if="match.media_type === 'movie' && match.poster_path" ng-click="selectionMade(match)">
+                <div style="margin-bottom: 2px; margin-top: 2px;font-size:20px">
+                    <img ng-if="match.poster_path" src="{{view.images}}{{ match.poster_path }}" style="width:25px;min-height:37px; margin-right: 10px" />
+                    {{ match.title }}
+                </div>
+            </a>
+            <a ng-if="match.media_type === 'person' && match.profile_path" ng-click="selectionMade(match)">
+                <div style="margin-bottom: 2px; margin-top: 2px;font-size:20px">
+                    <img src="{{view.images}}{{ match.profile_path }}" style="width:25px;min-height:37px; margin-right:10px" />
+                    {{ match.name }}
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+
