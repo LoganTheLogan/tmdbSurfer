@@ -8,9 +8,9 @@
                 ng-click="credit.media_type='movie';$emit('navToItem', credit)"
             >
                 <div 
-                    title="{{ credit.title }} as {{ credit.character }}"
+                    title="{{ credit.title + (credit.character ? (' as ' + credit.character) : '')}}"
                 >
-                    <img src="{{view.images}}{{ credit.poster_path }}" title="{{ credit.title }} as {{ credit.character }}" width="65" height="97" ng-if="credit.poster_path" />
+                    <img src="{{view.images}}{{ credit.poster_path }}" width="65" height="97" ng-if="credit.poster_path" />
                 </div>
                 <br />
                     {{ credit.title }}

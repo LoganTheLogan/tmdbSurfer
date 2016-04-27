@@ -33,12 +33,9 @@ define( [ 'angular',
                     return;
                     
                 $scope.searching = true;
-                    
-                if(item.media_type == 'movie') {
-                    //look for actors in this movie
-                    
-                    var api = TMDBAPIService.Movie();
-                    api.movie.movie(item.id).then( 
+                
+                function process(serviceType, scrubFunc) {
+                    serviceType(item.id).then( 
                         function (response) {
                             $scope.searching = false;
                             if(response.status != 200) {
@@ -46,7 +43,7 @@ define( [ 'angular',
                             }
                             else {
                                 $scope.searchResults = response.data;
-                                $scope.searchResults.credits.cast = scrub($scope.searchResults.credits.cast, 'profile_path');
+                                scrubFunc($scope.searchResults);
                                 $scope.resultsChanged();
                             }
                         },
@@ -55,26 +52,14 @@ define( [ 'angular',
                         }
                     );
                 }
+                    
+                if(item.media_type == 'movie') {
+                    //look for actors in this movie
+                    process(TMDBAPIService.Movie().movie.movie, function(results) { results.credits.cast = scrub(results.credits.cast, 'profile_path');})
+                }
                 else if(item.media_type == 'person') {
                     //look for movies this person has acted in
-                                
-                    var api = TMDBAPIService.Person();
-                    api.person.person(item.id).then( 
-                        function (response) {  
-                            $scope.searching = false;  
-                            if(response.status != 200) {
-                                $scope.err = "Query returned with status: " + response.status;
-                            }
-                            else {
-                                $scope.searchResults = response.data;
-                                $scope.searchResults.movie_credits.cast = scrub($scope.searchResults.movie_credits.cast, 'poster_path');
-                                $scope.resultsChanged();
-                            }
-                        },
-                        function(err) {
-                            $scope.err = "Query returned with error: " + JSON.stringify(err);
-                        }
-                    );
+                    process(TMDBAPIService.Person().person.person, function(results) { results.movie_credits.cast = scrub(results.movie_credits.cast, 'profile_path');})
                 }
             });
         

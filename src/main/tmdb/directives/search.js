@@ -12,7 +12,6 @@
                 templateUrl: '/tmdb/partials/search/search.html',
                 restrict: 'E',
                 scope: {
-                    movieList:      '=ngModel', //LMR
                     setParentItem:  '&'
                 },
                 link: function($scope, element) {
@@ -25,10 +24,13 @@
                         return {top:(offset.top + height) + 'px', left:offset.left + 'px'};
                     };
                     
-                    //enables using escape key to clear things out
+                    
                     $scope.searchKeyDown = function($event) {
-                        if($event.keyCode == 27) {  //escape
+                        if($event.keyCode == 27) {  //enables using escape key to clear things out
                             $scope.clearSearch();
+                            $event.stopPropagation();
+                            $event.preventDefault();
+                            return true;
                         }
                     };
                     
