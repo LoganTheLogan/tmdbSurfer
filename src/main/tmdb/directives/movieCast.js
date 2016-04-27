@@ -22,6 +22,9 @@ define( [ 'angular',
                     }
                     
                     $scope.$on('layoutChange', setDivHeight);
+                    
+                    //
+                    $scope.altProfilePath = "http://nick.mtvnimages.com/nick/properties/spongebob-squarepants/characters/spongebob-about-web-desktop.jpg?quality=0.75";
                 }
             };
         };

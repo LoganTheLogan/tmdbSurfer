@@ -22,6 +22,8 @@ define( [ 'angular',
                     }
                     
                     $scope.$on('layoutChange', setDivHeight);
+                    
+                    $scope.altPosterPath = "https://pbs.twimg.com/media/B_RTMaEUsAAJqIV.jpg";
                 }
             };
         };

@@ -11,12 +11,12 @@ define( [ 'angular',
         
         
         //sometime tmdb returns redundant-id'd results
-        function scrub(listWithIds, requiredField) {
+        function scrub(listWithIds) {
             var scrubbed = [];
             
             var idsSeen = {};
             listWithIds.forEach(function(item) {
-                if((!idsSeen[item.id]) && (item[requiredField])) {
+                if(!idsSeen[item.id]) {
                     scrubbed.push(item);
                     idsSeen[item.id] = true;
                 }
@@ -59,11 +59,11 @@ define( [ 'angular',
                     
                 if(item.media_type == 'movie') {
                     //look for actors in this movie
-                    process(TMDBAPIService.Movie().movie.movie, function(results) { results.credits.cast = scrub(results.credits.cast, 'profile_path');})
+                    process(TMDBAPIService.Movie().movie.movie, function(results) { results.credits.cast = scrub(results.credits.cast);})
                 }
                 else if(item.media_type == 'person') {
                     //look for movies this person has acted in
-                    process(TMDBAPIService.Person().person.person, function(results) { results.movie_credits.cast = scrub(results.movie_credits.cast, 'poster_path');})
+                    process(TMDBAPIService.Person().person.person, function(results) { results.movie_credits.cast = scrub(results.movie_credits.cast);})
                 }
             });
         

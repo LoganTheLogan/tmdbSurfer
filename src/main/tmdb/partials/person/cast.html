@@ -4,13 +4,12 @@
     <div id="cast-movies" ng-if="castCredits.length" style="overflow-x:hidden;overflow-y:scroll">
         <div ng-repeat="credit in castCredits track by (personName + credit.id)">
             <div style="float: left; margin: 10px; width: 100px; height: 150px;cursor:pointer" 
-                ng-if="credit.poster_path"
                 ng-click="credit.media_type='movie';$emit('navToItem', credit)"
             >
                 <div 
                     title="{{ credit.title + (credit.character ? (' as ' + credit.character) : '')}}"
                 >
-                    <img src="{{view.images}}{{ credit.poster_path }}" width="65" height="97" ng-if="credit.poster_path" />
+                    <img src="{{credit.poster_path ? (view.images + credit.poster_path) : altPosterPath }}" width="65" height="97" />
                 </div>
                 <br />
                     {{ credit.title }}

@@ -19,7 +19,7 @@ define( [ 'angular',
             this.extendToLowWindowEdge = function(element) { 
                 var offset = element ? element.offset() : undefined;
                 if(offset !== undefined) {
-                    var divHeight = (window.innerHeight - offset.top) + "px"; 
+                    var divHeight = ((window.innerHeight - offset.top) - 10) + "px"; 
                     element.css({"height":divHeight}); 
                 }
             }
